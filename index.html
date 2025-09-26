@@ -12,17 +12,42 @@
       margin: 0;
       padding: 0;
       text-align: center;
+      overflow-x: hidden;
     }
 
     header {
       padding: 30px 20px 10px;
+      position: relative;
+    }
+
+    .logo-container {
+      display: inline-block;
+      position: relative;
+    }
+
+    .logo-container img {
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #58a6ff;
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.6);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container img:hover {
+      transform: scale(1.05);
     }
 
     h1 {
       color: #58a6ff;
-      font-size: 2rem;
-      margin: 0;
+      font-size: 2.5rem;
+      margin: 15px 0 0;
       text-shadow: 0 0 15px rgba(88, 166, 255, 0.6);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 15px rgba(88, 166, 255, 0.6); }
+      to { text-shadow: 0 0 25px rgba(88, 166, 255, 0.9), 0 0 35px rgba(88, 166, 255, 0.4); }
     }
 
     .card {
@@ -33,86 +58,271 @@
       max-width: 600px;
       box-shadow: 0 0 25px rgba(88, 166, 255, 0.2);
       backdrop-filter: blur(8px);
-      animation: fadeIn 1s ease-in-out;
+      animation: fadeInUp 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #58a6ff, #a371f7, #2ea043, #58a6ff);
+      background-size: 200% 100%;
+      animation: gradient 3s linear infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       color: #58a6ff;
       margin-top: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       text-transform: uppercase;
       border-bottom: 1px solid #30363d;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: #58a6ff;
+    }
+
+    .owner {
+      font-size: 1rem;
+      margin-bottom: 5px;
     }
 
     .owner a {
       color: #58a6ff;
       font-weight: bold;
       text-decoration: none;
+      transition: all 0.3s ease;
     }
 
     .owner a:hover {
-      text-decoration: underline;
+      color: #a371f7;
+      text-shadow: 0 0 8px rgba(163, 113, 247, 0.6);
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 15px;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     a {
       display: block;
-      padding: 12px 15px;
-      border-radius: 10px;
+      padding: 15px;
+      border-radius: 12px;
       background: #21262d;
       color: #f0f6fc;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    a:hover::before {
+      left: 100%;
     }
 
     /* Efek hover warna kategori */
     .bot a:hover {
-      background: #58a6ff;
+      background: linear-gradient(135deg, #58a6ff, #3a7bd5);
       color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(88, 166, 255, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(88, 166, 255, 0.6);
     }
 
     .whatsapp a:hover {
-      background: #2ea043;
+      background: linear-gradient(135deg, #2ea043, #1a7a37);
       color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(46, 160, 67, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(46, 160, 67, 0.6);
     }
 
     .channel a:hover {
-      background: #a371f7;
+      background: linear-gradient(135deg, #a371f7, #7c3aed);
       color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(163, 113, 247, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(163, 113, 247, 0.6);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .service-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .vpn-btn {
+      background: linear-gradient(135deg, #58a6ff, #3a7bd5);
+      color: white;
+    }
+
+    .vpn-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(88, 166, 255, 0.6);
+    }
+
+    .pedia-btn {
+      background: linear-gradient(135deg, #a371f7, #7c3aed);
+      color: white;
+    }
+
+    .pedia-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(163, 113, 247, 0.6);
+    }
+
+    .service-btn i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .floating-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(88, 166, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float-up 10s linear infinite;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
     }
 
     footer {
-      margin: 20px;
-      font-size: 0.8rem;
+      margin: 30px 20px;
+      font-size: 0.9rem;
       color: #8b949e;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Animasi untuk card */
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        max-width: 90%;
+        padding: 20px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .service-links {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .service-btn {
+        width: 80%;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="floating-particles" id="particles"></div>
+
   <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="ADIJAYA VPN Logo">
+    </div>
     <h1>ADIJAYA STORE VPN</h1>
   </header>
+
+  <div class="service-links">
+    <a href="https://order.bandarvpn.cloud/" class="service-btn vpn-btn" target="_blank">
+      <i class="fas fa-shield-alt"></i> ADIJAYA VPN
+    </a>
+    <a href="https://order.bandarvpn.cloud/sosmed.html" class="service-btn pedia-btn" target="_blank">
+      <i class="fas fa-users"></i> ADIJAYA PEDIA
+    </a>
+  </div>
 
   <div class="card">
     <p class="owner">Owner: <a href="https://t.me/AdijayaStoreVpn1">@AdijayaStoreVpn</a></p>
@@ -124,7 +334,6 @@
       <a href="https://t.me/adijayastorevpnbot">🤖 BOT MULTIFUNGSI</a>
       <a href="https://t.me/downloaderstalkerbot">🤖 BOT DOWNLOADER</a>
       <a href="https://t.me/dorxladijayabot">🤖 BOT DOR XL</a>
-      <a href="https://t.me/SuntikSosialMediabot">🤖 BOT SUNTIK SOSMED</a>
       <a href="https://t.me/convertgambarbot">🤖 BOT CONVERT JPG</a>
     </div>
   </div>
@@ -162,5 +371,110 @@
   <footer>
     © 2025 ADIJAYA STORE VPN
   </footer>
+
+  <script>
+    // Membuat partikel mengambang
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Ukuran random
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posisi random
+        particle.style.left = `${Math.random() * 100}%`;
+        
+        // Durasi animasi random
+        const duration = Math.random() * 10 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        
+        // Delay animasi random
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Inisialisasi partikel saat halaman dimuat
+    window.addEventListener('load', createParticles);
+    
+    // Efek hover pada logo
+    const logo = document.querySelector('.logo-container img');
+    logo.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.1) rotate(5deg)';
+    });
+    
+    logo.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1) rotate(0deg)';
+    });
+    
+    // Efek klik pada tombol layanan
+    const serviceBtns = document.querySelectorAll('.service-btn');
+    serviceBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        // Membuat efek riak
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+    
+    // Animasi untuk link saat halaman dimuat
+    const cards = document.querySelectorAll('.card');
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
+    });
+    
+    // Efek ketik pada link
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', function() {
+        // Simpan ke localStorage bahwa pengguna telah mengklik link
+        const linkText = this.textContent;
+        localStorage.setItem('lastClickedLink', linkText);
+      });
+    });
+    
+    // Cek apakah ada link yang terakhir diklik
+    window.addEventListener('load', function() {
+      const lastClickedLink = localStorage.getItem('lastClickedLink');
+      if (lastClickedLink) {
+        console.log(`Link terakhir yang diklik: ${lastClickedLink}`);
+      }
+    });
+  </script>
 </body>
 </html>
